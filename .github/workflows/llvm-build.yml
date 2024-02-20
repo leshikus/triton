@@ -1,11 +1,11 @@
 name: LLVM Build
 
 on:
-  push:
-    branches:
-      - llvm-head
-    paths:
-      - cmake/llvm-hash.txt
+#  push:
+#    branches:
+#      - llvm-head
+#    paths:
+#      - cmake/llvm-hash.txt
   workflow_dispatch:
 
 env:

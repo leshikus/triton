@@ -1,0 +1,27 @@
+name: Conda build
+
+on:
+  workflow_dispatch:
+  push:
+  schedule:
+    - cron: '51 3 * * *'
+
+permissions: read-all
+
+jobs:
+  build-conda:
+    name: Conda build
+    runs-on: ubuntu:latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          repository: intel/intel-xpu-backend-for-triton
+          ref: lesh/add-conda-env-build
+
+      - name: Build packages
+        run: |
+          conda update conda
+          conda env update scripts/triton.yml
+          conda install -n triton -c conda-forge python=${{ matrix.python }}.*
+          conda run --no-capture-output -n triton ./scripts/compile-triton.sh --llvm
