@@ -23,6 +23,6 @@ jobs:
         run: |
           set -vx
           conda update conda
-          conda env update scripts/triton.yml
+          conda env update -f scripts/triton.yml
           conda install -n triton -c conda-forge python=${{ matrix.python }}.*
           conda run --no-capture-output -n triton ./scripts/compile-triton.sh --llvm
